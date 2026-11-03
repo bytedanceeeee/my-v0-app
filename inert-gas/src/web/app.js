@@ -576,7 +576,7 @@ function card(p, opts = {}) {
   );
   const menu = h('div', { class: 'menu' }, moreBtn, pop);
 
-  el.append(meta, body, moreBtn2, h('div', { class: 'actions' }, reactBtns, h('span', { class: 'spacer' }), cBtn, shareBtn, menu));
+  el.append(meta, body, ...(moreBtn2 ? [moreBtn2] : []), h('div', { class: 'actions' }, reactBtns, h('span', { class: 'spacer' }), cBtn, shareBtn, menu));
   if (opts.openComments) setTimeout(() => cBtn.click(), 0);
   return el;
 }
