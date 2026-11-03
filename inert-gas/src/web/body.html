@@ -1,0 +1,318 @@
+
+<a class="sr-only" href="#feed" data-tx="s_skip_to_confessions">Skip to confessions</a>
+<noscript><div style="padding:24px;text-align:center;font:16px system-ui">This wall needs JavaScript to load confessions. If you use Tor Browser on its Safest setting, switch to Safer or Standard for this site.</div></noscript>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#" id="home" aria-label="Inert Gas home">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 32 32"><circle class="mk-shell2" cx="16" cy="16" r="15"/><circle class="mk-shell" cx="16" cy="16" r="10.5"/><circle class="mk-core" cx="16" cy="16" r="4"/><circle class="mk-e" cx="23.4" cy="8.6" r="1.6"/><circle class="mk-e" cx="8.6" cy="23.4" r="1.6"/></svg></span>
+      <span class="brand-t"><b>Inert <i>Gas</i></b><span data-tx="s_confessions_st_xaviers_college">Confessions · St. Xavier's College (SXC)</span></span>
+    </a>
+    <button class="icon-btn desk" id="b-rules" type="button" data-icon="book"><span class="label">Rules</span></button>
+    <button class="icon-btn desk" id="b-helplines" type="button" data-icon="shield"><span class="label" data-tx="s_helplines">Helplines</span></button>
+    <button class="icon-btn desk" id="b-help" type="button" data-icon="help" aria-label="Keyboard shortcuts"></button>
+    <button class="icon-btn" id="b-theme" type="button" aria-label="Switch theme"></button>
+    <button class="btn desk has-dot" id="b-talk" type="button" data-icon="comment">Message the admin<i class="ndot" id="talk-dot" hidden></i></button>
+    <button class="btn primary desk" id="b-confess" type="button" data-icon="pen" data-tx="t_b_confess">Confess</button>
+  </div>
+</header>
+
+
+<button class="pill" id="pill" type="button" hidden aria-live="polite"></button>
+
+<div class="shell">
+  <main class="feed-col" id="main">
+    <div class="banner" id="banner" hidden role="status"><span data-icon="info"></span><p id="banner-t"></p><button class="icon-btn" id="banner-x" type="button" aria-label="Dismiss announcement" data-icon="x"></button></div>
+    <div class="banner" id="demo-note" hidden><span data-icon="info"></span><p>Demo mode. Everything here is sample data saved only in this browser. Nothing is sent anywhere.</p><button class="btn small" id="demo-reset" type="button">Reset demo</button></div>
+    <section class="prompt-card" id="w-prompt" hidden aria-labelledby="pc-h">
+      <div class="pc-t"><h2 id="pc-h">This week</h2><p id="pc-p"></p></div>
+      <button class="btn primary small" type="button" id="pc-write" data-icon="pen" data-tx="t_pc_write">Write yours</button>
+    </section>
+    <h1 class="sr-only">Inert Gas</h1>
+    <button class="ann-chip" id="ann-chip" type="button" hidden><span data-icon="info"></span><b id="ann-chip-t"></b><span class="ann-more">Read</span></button>
+    <section class="quick" id="quick" aria-label="Write a confession">
+      <div class="qk-head" aria-hidden="true"><span class="qk-k" data-tx="s_qk_kicker">Confession slip</span><span class="qk-anon" data-icon="shield" data-tx="s_qk_anon">No name. No account. Nobody sees who wrote this.</span></div>
+      <label for="qk-ta" class="sr-only" data-tx="s_write_a_confession">Write a confession</label>
+      <textarea id="qk-ta" class="field" rows="3" maxlength="2000" data-ph="qk_placeholder" placeholder="What is on your mind? Confess here, nobody will know it is you."></textarea>
+      <div class="qk-bar">
+        <label class="pick" for="qk-flair"><span class="sr-only" data-tx="s_flair">Flair</span><select id="qk-flair" class="select"></select></label>
+        <span class="count" id="qk-count">0 / 1000</span>
+        <span class="spacer"></span>
+        <button class="btn primary" type="button" id="qk-send" data-icon="send" data-tx="t_qk_send">Confess</button>
+      </div>
+      <div class="captcha" id="qk-cap" hidden></div>
+      <p class="err" id="qk-err" role="alert" hidden></p>
+      <p class="ok-msg" id="qk-ok" role="status" hidden></p>
+      <p class="qk-note"><button class="linkish" type="button" data-privacy data-tx="s_privacy_policy">Privacy policy</button><span aria-hidden="true">·</span><button class="linkish" type="button" id="qk-rules">Rules</button></p>
+    </section>
+    <div class="controls">
+      <div class="row" id="sortrow">
+        <div class="seg" role="group" aria-label="Sort confessions" id="sorts">
+          <button type="button" data-sort="latest" aria-pressed="true" data-tx="s_latest">Latest</button>
+          <button type="button" data-sort="top" aria-pressed="false" data-tx="s_top">Top</button>
+          <button type="button" data-sort="trending" aria-pressed="false" data-tx="s_trending">Trending</button>
+          <button type="button" data-sort="random" aria-pressed="false" data-tx="s_random">Random</button>
+        </div>
+        <label class="pick" for="flair-f"><span class="sr-only" data-tx="s_filter_by_flair">Filter by flair</span><select id="flair-f" class="select" aria-label="Filter by flair"></select></label>
+        <button class="btn" type="button" id="surprise" data-icon="shuffle" aria-label="Show me a random confession" title="Shuffle"></button>
+      </div>
+      <div class="row">
+        <label class="search"><span class="sr-only" data-tx="s_search_loaded_confessions">Search loaded confessions</span><span data-icon="search"></span><input id="q" type="search" data-ph="search_placeholder" placeholder="Search confessions" autocomplete="off"></label>
+      </div>
+      <div class="row" id="filters">
+        <label class="pick" id="range-wrap" for="range-f" hidden><span data-tx="s_top_of">Top of</span><select id="range-f" class="select"><option value="day">Today</option><option value="week" selected>This week</option><option value="all">All time</option></select></label>
+      </div>
+    </div>
+    <div class="feed" id="feed" aria-live="off"></div>
+    <div id="sentinel" aria-hidden="true"></div>
+    <div id="feed-foot"></div>
+  </main>
+
+  <aside class="aside" id="aside" aria-label="Today on the wall">
+    <section class="widget ann" id="w-ann" hidden aria-labelledby="ann-h">
+      <h2 class="w-h" id="ann-h"><span data-icon="info"></span><span id="ann-title"></span></h2>
+      <p class="ann-t" id="ann-text"></p>
+      <div class="w-foot"><span id="ann-date"></span><button class="btn small" type="button" id="ann-open" data-tx="t_ann_open">Open full page</button></div>
+    </section>
+    <section class="widget cotd" id="w-cotd" hidden aria-labelledby="cotd-h">
+      <h2 class="w-h" id="cotd-h"><span data-icon="star"></span>Confession of the day</h2>
+      <p class="cotd-t" id="cotd-t"></p>
+      <div class="w-foot"><span id="cotd-m"></span><button class="btn small" type="button" id="cotd-open" data-tx="t_cotd_open">Read it</button></div>
+    </section>
+    <section class="widget" aria-labelledby="mood-h">
+      <h2 class="w-h" id="mood-h"><span data-icon="spark"></span>Campus mood today</h2>
+      <div class="moods" id="moods" title="One tap per day. Results show after you pick."></div>
+      <p class="note" id="mood-n" style="margin-top:10px" hidden></p>
+    </section>
+    <section class="widget" id="w-week" hidden aria-labelledby="week-h">
+      <h2 class="sr-only" id="week-h" data-tx="t_week_h">Campus mood this week</h2>
+      <p class="week-line" id="week-line"></p>
+      <div class="wbars" id="week-bars"></div>
+      <div class="w-foot"><span id="week-n"></span><button class="btn small" type="button" id="week-save" data-icon="download" aria-label="Save as image" data-tx="t_week_save">Save image</button></div>
+    </section>
+    <section class="widget" aria-labelledby="poll-h">
+      <h2 class="w-h" id="poll-h"><span data-icon="chart"></span>Poll of the day</h2>
+      <div id="poll"></div>
+      <button class="linkish" type="button" id="poll-suggest" data-tx="t_poll_suggest">Suggest a poll question</button>
+    </section>
+    <div class="alinks">
+      <button class="linkish" type="button" id="aside-rules">Rules</button>
+      <button class="linkish" type="button" id="aside-privacy" data-tx="t_aside_privacy">Privacy policy</button>
+      <button class="linkish" type="button" id="aside-helplines" data-tx="t_aside_helplines">Helplines</button>
+      <button class="linkish" type="button" id="apply-open" hidden data-tx="t_apply_open">Apply to moderate</button>
+    </div>
+  </aside>
+</div>
+
+<nav class="bnav" aria-label="Main">
+  <button type="button" id="n-wall" aria-current="page" data-icon="home"><span>Wall</span></button>
+  <button type="button" id="n-today" data-icon="spark"><span>Today</span></button>
+  <button type="button" class="fab" id="n-confess" aria-label="Write a confession" data-icon="pen"></button>
+  <button type="button" id="n-talk" class="has-dot" data-icon="comment"><span>Message</span><i class="ndot" id="n-talk-dot" hidden></i></button>
+  <button type="button" id="n-rules" data-icon="book"><span>Rules</span></button>
+</nav>
+
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<!-- Composer -->
+<dialog id="composer" class="sheet" aria-labelledby="comp-h">
+  <div class="d-head"><h2 id="comp-h" data-tx="t_comp_h">Write a confession</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body" id="comp-form">
+    <div>
+      <label for="comp-ta" class="sr-only" data-tx="s_your_confession">Your confession</label>
+      <textarea id="comp-ta" class="field composer-ta" maxlength="2000" data-ph="comp_placeholder" placeholder="Say what you have been holding in..."></textarea>
+      <div class="c-foot" style="margin-top:8px">
+        <button class="btn small" type="button" id="dice" data-icon="dice" data-tx="t_dice">Give me a prompt</button>
+        <span class="count" id="comp-count" aria-live="polite">0 / 1000</span>
+      </div>
+    </div>
+    <div>
+      <label class="note" id="comp-flair-l" for="comp-flair" style="display:block;margin-bottom:8px" data-tx="flair_label">Flair</label>
+      <select id="comp-flair" class="select" style="width:100%"></select>
+    </div>
+    <div class="comp-prompt" id="comp-prompt" hidden><span id="comp-prompt-t"></span><button class="btn small" type="button" id="comp-use" data-tx="t_comp_use">Use this prompt</button></div>
+    <div class="care" id="care" hidden role="note">
+      <p><b data-tx="s_hey_it_sounds_like">Hey, it sounds like a lot right now.</b> You do not have to carry it alone. Talking to someone you trust can help, and these lines are free to call.</p>
+      <ul class="helps" id="care-list"></ul>
+      <div class="row"><button class="btn small" type="button" id="care-talk" data-tx="t_care_talk">Message the admin</button><button class="btn small" type="button" id="care-x" data-tx="t_care_x">Okay, thanks</button></div>
+    </div>
+    <div class="captcha" id="comp-cap"></div>
+    <p class="err" id="comp-err" role="alert" hidden></p>
+    <div class="d-foot">
+      <span class="note">Draft is saved on this device only. <button class="linkish" type="button" data-privacy style="padding:0" data-tx="s_privacy_policy2">Privacy policy</button></span>
+      <button class="btn primary" type="button" id="comp-send" data-icon="send" data-tx="t_comp_send">Post confession</button>
+    </div>
+  </div>
+  <div class="d-body" id="comp-done" hidden>
+    <div class="success">
+      <div class="big" data-icon="check"></div>
+      <h3 data-tx="s_sent_thank_you_for">Sent. Thank you for sharing.</h3>
+      <p id="done-t"></p>
+      <div class="timer" id="done-timer" aria-live="off"></div>
+      <button class="btn" type="button" data-close data-tx="s_back_to_the_wall">Back to the wall</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Report -->
+<dialog id="report" class="sheet" aria-labelledby="rep-h">
+  <div class="d-head"><h2 id="rep-h" data-tx="t_rep_h">Report this</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body">
+    <p class="note" data-tx="s_reports_are_private_the">Reports are private. The item is hidden right away and an admin reads your report.</p>
+    <div><label class="note" id="rep-rl" for="rep-sel" style="display:block;margin-bottom:8px" data-tx="rep_problem">What is the problem?</label><select id="rep-sel" class="select" style="width:100%"></select></div>
+    <div>
+      <label for="rep-d" class="note" style="display:block;margin-bottom:8px" data-tx="s_describe_it_in_a">Describe it in a sentence or two</label>
+      <textarea id="rep-d" class="field" maxlength="300" rows="3" data-ph="rep_placeholder" placeholder="For example: this names a student in the second paragraph."></textarea>
+      <div class="c-foot" style="margin-top:6px"><span class="note" data-tx="s_required_at_least_10">Required. At least 10 characters.</span><span class="count" id="rep-count">0 / 300</span></div>
+    </div>
+    <p class="err" id="rep-err" role="alert" hidden></p>
+    <div class="d-foot"><button class="btn" type="button" data-close data-tx="s_cancel">Cancel</button><button class="btn primary" type="button" id="rep-send" data-icon="flag" data-tx="t_rep_send">Send report</button></div>
+  </div>
+</dialog>
+
+<!-- Share -->
+<dialog id="share" aria-labelledby="share-h">
+  <div class="d-head"><h2 id="share-h" data-tx="t_share_h">Share as image</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body">
+    <img class="share-prev" id="share-img" alt="Preview of the share card">
+    <div class="styles" role="radiogroup" aria-label="Card style" id="share-styles"></div>
+    <p class="note" data-tx="s_only_the_confession_text">Only the confession text and the wall name appear on the image.</p>
+    <div class="d-foot"><button class="btn" type="button" id="share-link" data-icon="link" data-tx="t_share_link">Copy link</button><button class="btn primary" type="button" id="share-dl" data-icon="download" data-tx="t_share_dl">Save image</button></div>
+  </div>
+</dialog>
+
+<!-- Single post (permalink) -->
+<dialog id="single" aria-labelledby="single-h">
+  <div class="d-head"><h2 id="single-h" data-tx="t_single_h">Confession</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body" id="single-b"></div>
+</dialog>
+
+<!-- Poll suggestion -->
+<dialog id="suggest" class="sheet" aria-labelledby="sug-h">
+  <div class="d-head"><h2 id="sug-h" data-tx="t_sug_h">Suggest a poll</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body">
+    <p class="note" data-tx="s_suggestions_go_to_the">Suggestions go to the admin for review. Keep it fun and kind.</p>
+    <label for="sug-ta" class="sr-only" data-tx="s_your_poll_idea">Your poll idea</label>
+    <textarea id="sug-ta" class="field" maxlength="200" data-ph="sug_placeholder" placeholder="Best place to study on campus? Library, canteen, or the steps?"></textarea>
+    <div class="captcha" id="sug-cap"></div>
+    <p class="err" id="sug-err" role="alert" hidden></p>
+    <div class="d-foot"><span class="count" id="sug-count">0 / 200</span><button class="btn primary" type="button" id="sug-send" data-tx="t_sug_send">Send suggestion</button></div>
+  </div>
+</dialog>
+
+<!-- Moderator application -->
+<dialog id="apply" class="sheet" aria-labelledby="apply-dh">
+  <div class="d-head"><h2 id="apply-dh" data-tx="t_apply_dh">Apply to be a moderator</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body">
+    <div class="warn"><span data-icon="shield"></span><p><b data-tx="s_this_is_not_anonymous">This is not anonymous, and it is only for St. Xavier's students.</b> The admin will see your real name, details, answers and a photo of your college ID. Nobody else sees them and nothing is shown on the wall. Your ID photo is deleted as soon as the admin decides. Apply only if you are fully committed.</p></div>
+    <div class="fl" id="apply-code-wrap" hidden><label for="ap-code" data-tx="s_access_code">Access code</label><input class="fi" id="ap-code" type="text" autocomplete="off" maxlength="60"><span class="note" data-tx="s_ask_the_admin_or">Ask the admin or a trusted friend at the college.</span></div>
+    <h3 data-tx="s_about_you">About you</h3>
+    <div class="fgrid">
+      <label class="fl">Full name<input class="fi" id="ap-name" type="text" autocomplete="name" maxlength="80"></label>
+      <label class="fl">College roll or ID number<input class="fi" id="ap-roll" type="text" autocomplete="off" maxlength="30"></label>
+      <label class="fl">Programme<input class="fi" id="ap-program" type="text" maxlength="60" placeholder="BSc CSIT, BBA, BSW..." data-ph="p_ap_program"></label>
+      <label class="fl">Year or semester<input class="fi" id="ap-year" type="text" maxlength="30" placeholder="2nd year, 4th semester..." data-ph="p_ap_year"></label>
+      <label class="fl"><span>College email <span class="note" id="ap-dom"></span></span><input class="fi" id="ap-email" type="email" autocomplete="email" maxlength="160"></label>
+      <label class="fl">Phone number<input class="fi" id="ap-phone" type="tel" autocomplete="tel" maxlength="20"></label>
+    </div>
+    <h3 data-tx="s_your_college_id">Your college ID</h3>
+    <label class="fl">Photo of the front of your current college ID<input id="ap-file" type="file" accept="image/jpeg,image/png,image/webp"><span class="note" data-tx="s_name_photo_and_number">Name, photo and number must be readable. The photo is shrunk on your device before it is sent.</span></label>
+    <img class="idprev" id="ap-prev" alt="Preview of your ID photo" hidden>
+    <h3 data-tx="s_questions">Questions</h3>
+    <div id="ap-qs" style="display:flex;flex-direction:column;gap:14px"></div>
+    <h3 data-tx="s_confirm">Confirm</h3>
+    <div id="ap-consents" style="display:flex;flex-direction:column;gap:10px"></div>
+    <div class="captcha" id="ap-cap"></div>
+    <p class="err" id="ap-err" role="alert" hidden></p>
+    <div class="d-foot"><span class="note" data-tx="s_the_admin_replies_by">The admin replies by email or phone.</span><button class="btn primary" type="button" id="ap-send" data-tx="t_ap_send">Send application</button></div>
+  </div>
+</dialog>
+
+<!-- Rules -->
+<dialog id="rules" aria-labelledby="rules-h">
+  <div class="d-head"><h2 id="rules-h" data-tx="t_rules_h">Rules and about</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body">
+    <p data-tx="rules_intro">This is Inert Gas, the confession site for St. Xavier's College (SXC). Share the funny, the awkward and the honest. Keep it kind.</p>
+    <h3 data-tx="s_the_rules">The rules</h3>
+    <ol class="rules" id="rules-list"></ol>
+    <h3 data-tx="s_privacy">Privacy</h3>
+    <p class="note"><span data-tx="rules_priv_p">There are no accounts and your name is never shown. Nobody on the site can see who wrote a confession.</span> <button class="linkish" type="button" data-privacy style="padding:0" data-tx="s_read_the_privacy_policy">Read the privacy policy</button></p>
+    <h3 data-tx="s_if_you_are_struggling">If you are struggling</h3>
+    <p class="note" data-tx="rules_help_p">You matter. If you are thinking about hurting yourself, please reach out to someone you trust or call a support line. These calls are free, and a real person answers.</p>
+    <div class="row" style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn small" type="button" id="rules-help" data-icon="shield" data-tx="t_rules_help">Helplines</button><button class="btn small" type="button" id="rules-talk" data-icon="comment" data-tx="t_rules_talk">Message the admin</button></div>
+  </div>
+</dialog>
+
+<!-- Privacy policy -->
+<dialog id="privacy" aria-labelledby="priv-dh">
+  <div class="d-head"><h2 id="priv-dh" data-tx="t_priv_dh">Privacy policy</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body policy" id="priv-body"><p class="note">Loading...</p></div>
+</dialog>
+
+<!-- Talk to the admin -->
+<dialog id="talk" class="sheet" aria-labelledby="talk-dh">
+  <div class="d-head"><h2 id="talk-dh" data-tx="talk_h">Message the admin</h2><span class="sp"></span><button class="btn small" type="button" id="talk-helpbtn" data-icon="shield" data-tx="t_talk_helpbtn">Helplines</button><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body chatwrap">
+    <p class="note" id="talk-load" hidden></p>
+    <div class="care" id="talk-care" hidden role="note"><p><b data-tx="talk_care_b">If you might hurt yourself, please open Helplines right now.</b> <span data-tx="talk_care_s">The admin is a volunteer and may not see your message quickly. A trained person can talk with you straight away.</span></p></div>
+    <div class="chat-box" id="talk-box">
+      <div class="chat-msgs" id="talk-msgs" aria-live="polite"></div>
+      <div class="chat-meta">
+        <p class="note" id="talk-status"></p>
+        <div class="captcha" id="talk-cap" hidden></div>
+        <p class="err" id="talk-err" role="alert" hidden></p>
+      </div>
+      <div class="chat-in" id="talk-bar">
+        <label for="talk-in" class="sr-only" data-tx="s_your_message">Your message</label>
+        <textarea id="talk-in" class="field" rows="1" maxlength="1000" data-ph="talk_ph" placeholder="Write a message"></textarea>
+        <button class="btn primary" type="button" id="talk-send" aria-label="Send" data-icon="send"></button>
+      </div>
+      <div class="chat-closed" id="talk-closed" hidden><button class="btn" type="button" id="talk-newthread" data-tx="talk_new">Start a new message</button></div>
+    </div>
+    <div class="warn" id="talk-keep"><span data-icon="shield"></span><p><b data-tx="talk_keep_b">Keep this browser.</b> <span data-tx="talk_keep_s">Only the admin can read your messages. Replies are tied to this browser, so do not clear your browsing data or cookies, do not use a private window, and do not switch devices. Your IP address is logged with each message, as the privacy policy explains.</span> <button class="linkish" type="button" data-privacy style="padding:0" data-tx="s_privacy_policy3">Privacy policy</button></p></div>
+  </div>
+</dialog>
+
+<!-- Helplines -->
+<dialog id="helplines" aria-labelledby="hl-h">
+  <div class="d-head"><h2 id="hl-h" data-tx="hl_h">Helplines</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body">
+    <p class="note" data-tx="hl_p">You matter. If you are thinking about hurting yourself, please reach out to someone you trust or call a line below. These calls are free, and a real person answers.</p>
+    <ul class="helps" id="helplines-list"></ul>
+    <div><button class="btn small" type="button" id="hl-talk" data-icon="comment" data-tx="t_hl_talk">Message the admin</button></div>
+  </div>
+</dialog>
+
+<!-- Announcement (full page the first time, then it stays in the side panel) -->
+<dialog id="announce" aria-labelledby="an-h">
+  <div class="an-in">
+    <p class="an-kicker" data-tx="an_kicker">Announcement</p>
+    <h2 id="an-h"></h2>
+    <p class="an-body" id="an-body"></p>
+    <div class="an-foot"><button class="btn primary" type="button" id="an-ok" data-tx="an_ok">Got it</button><span class="note" data-tx="an_note">You can read this again any time in the side panel.</span></div>
+  </div>
+</dialog>
+
+<!-- Flair check -->
+<dialog id="flairask" aria-labelledby="fa-h">
+  <div class="d-head"><h2 id="fa-h" data-tx="fa_h">Is Other the right flair?</h2></div>
+  <div class="d-body">
+    <p class="note" data-tx="fa_p">Your flair is still set to Other. The right flair helps people find confessions they care about. Do you want to post it as Other?</p>
+    <div class="d-foot"><button class="btn" type="button" id="fa-change" data-tx="fa_change">Let me choose</button><button class="btn primary" type="button" id="fa-yes" data-tx="fa_yes">Yes, post as Other</button></div>
+  </div>
+</dialog>
+
+<!-- Keyboard help -->
+<dialog id="help" aria-labelledby="help-h">
+  <div class="d-head"><h2 id="help-h" data-tx="t_help_h">Keyboard shortcuts</h2><button class="icon-btn" type="button" data-close aria-label="Close" data-icon="x"></button></div>
+  <div class="d-body">
+    <dl class="keys">
+      <dt><kbd>c</kbd></dt><dd>Write a confession</dd>
+      <dt><kbd>/</kbd></dt><dd>Search</dd>
+      <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>Next and previous confession</dd>
+      <dt><kbd>?</kbd></dt><dd>This help</dd>
+      <dt><kbd>Esc</kbd></dt><dd>Close any window</dd>
+    </dl>
+  </div>
+</dialog>
+
